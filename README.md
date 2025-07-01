@@ -40,7 +40,7 @@ sub-converter 是一个支持多种客户端格式的**订阅链接转换与短�
 
 ## Docker 构建与运行
 
-1. 直接拉取并运行官方镜像
+1. 直接拉取并运行镜像
    ```bash
    docker run -d \
      -v /your/host/database:/app/database \
@@ -49,10 +49,6 @@ sub-converter 是一个支持多种客户端格式的**订阅链接转换与短�
      ghcr.io/eooce/sub-converter:latest
    ```
    > 持久化目录 `/your/host/database` 用于保存 SQLite 数据库文件，防止数据丢失。
-
-2. 如需本地构建镜像
-   ```bash
-   docker build -t sub-converter .
    ```
 
 ## Docker Compose 部署示例
