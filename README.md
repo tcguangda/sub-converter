@@ -87,5 +87,9 @@ docker-compose up -d
 - better-sqlite3
 - js-yaml
 
+## 环境变量说明
+
+- `PORT`：服务监听端口，默认 7788。可通过 `PORT=8080 npm start` 或 docker-compose 的 environment 配置自定义。
+
 ---
 如有问题或建议，欢迎 issue 或 PR！
