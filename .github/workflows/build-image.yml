@@ -7,9 +7,9 @@ on:
       - 'Dockerfile'
       - 'server.js'
       - 'package.json'
-      - 'src/..'
+      - 'src/**'
   pull_request:
-    branches: [ server]
+    branches: [ server ]
   workflow_dispatch:
 
 jobs:
@@ -22,6 +22,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          ref: server  
 
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
