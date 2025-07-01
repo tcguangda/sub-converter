@@ -47,7 +47,7 @@ export const generateStyles = () => `
     --switch-checked-bg: #4a0e8f;
   }
 
-  .container { max-width: 800px; }
+  .container { max-width: 800px; margin-top: 4rem !important;}
 
   body {
     background-color: var(--bg-color);
