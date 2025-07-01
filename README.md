@@ -4,6 +4,9 @@
 
 sub-converter 是一个支持多种客户端格式的**订阅链接转换与短链生成服务**，支持 Singbox、Clash、Surge、Xray 等主流代理配置格式。支持多语言界面、在线转换、短链跳转、订阅配置存储等功能，适合自部署和团队共享。
 
+## 温馨提示
+main主分支为cloudflare worker部署使用，server分支为服务器/docker容器等构建所需的源代码
+
 ## 主要功能
 - 订阅链接格式互转（Singbox/Clash/Surge/Xray）
 - 在线生成和管理短链，支持跳转
