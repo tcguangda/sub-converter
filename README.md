@@ -41,9 +41,9 @@ sub-converter 是一个支持多种客户端格式的**订阅链接转换与短�
 
 ## Docker 构建与运行
 
-1. 构建镜像
+1. 镜像一键部署
    ```bash
-   ghcr.io/eooce/sub-converter:latest
+   eooce/sub-converter:latest
    ```
 2. 运行容器（持久化数据库）
    ```bash
@@ -51,7 +51,7 @@ sub-converter 是一个支持多种客户端格式的**订阅链接转换与短�
      -v /your/host/database:/app/database \
      -p 7788:7788 \
      --name sub-converter \
-     ghcr.io/eooce/sub-converter:latest
+     eooce/sub-converter:latest
    ```
    > 持久化目录 `/your/host/database` 用于保存 SQLite 数据库文件，防止数据丢失。
 
@@ -62,7 +62,7 @@ sub-converter 是一个支持多种客户端格式的**订阅链接转换与短�
 version: '3'
 services:
   sub-converter:
-    image: ghcr.io/eooce/sub-converter:latest
+    image: eooce/sub-converter:latest
     container_name: sub-converter
     ports:
       - "7788:7788"
