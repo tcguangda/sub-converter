@@ -22,9 +22,10 @@ const generateHead = () => `
     <meta property="og:title" content="${t('ogTitle')}">
     <meta property="og:description" content="${t('ogDescription')}">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://sublink-worker.sageer.me/">
+    <meta property="og:url" content="https://sublink.eooce.com/">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="/src/img/favicon.ico" type="image/x-icon">
     <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
     <style>
       ${generateStyles()}
@@ -35,6 +36,7 @@ const generateHead = () => `
 const generateBody = (xrayUrl, singboxUrl, clashUrl, surgeUrl, baseUrl) => `
   <body>
     ${generateDarkModeToggle()}
+    ${generateLanguageSelector()}
     ${generateGithubLink()}
     <div class="container mt-5">
       <div class="card mb-5">
@@ -48,7 +50,30 @@ const generateBody = (xrayUrl, singboxUrl, clashUrl, surgeUrl, baseUrl) => `
       </div>
     </div>
     ${generateScripts()}
+    <script>
+      // 设置下拉框选中当前语言
+      (function() {
+        var urlParams = new URLSearchParams(window.location.search);
+        var lang = urlParams.get('lang') || navigator.language || 'zh-CN';
+        document.getElementById('langSelect').value = lang;
+        document.getElementById('langSelect').addEventListener('change', function() {
+          urlParams.set('lang', this.value);
+          window.location.search = urlParams.toString();
+        });
+      })();
+    </script>
   </body>
+`;
+
+const generateLanguageSelector = () => `
+  <div style="position: fixed; top: 10px; right: 70px; z-index: 1001;">
+    <select id="langSelect" class="form-select form-select-sm" style="width: 110px; height: 45px;">
+      <option value="zh-CN">简体中文</option>
+      <option value="en">English</option>
+      <option value="fa">فارسی</option>
+      <option value="ru">Русский</option>
+    </select>
+  </div>
 `;
 
 const generateDarkModeToggle = () => `
@@ -58,14 +83,14 @@ const generateDarkModeToggle = () => `
 `;
 
 const generateGithubLink = () => `
-  <a href="https://github.com/7Sageer/sublink-worker" target="_blank" rel="noopener noreferrer" class="github-link">
+  <a href="https://github.com/eooce/sub-converter" target="_blank" rel="noopener noreferrer" class="github-link">
     <i class="fab fa-github"></i>
   </a>
 `;
 
 const generateCardHeader = () => `
   <div class="card-header text-center">
-    <h1 class="display-4 mb-0">Sublink Worker</h1>
+    <h1 class="display-4 mb-0">${t('pageTitle')}</h1>
   </div>
 `;
 

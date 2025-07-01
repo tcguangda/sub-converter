@@ -140,8 +140,7 @@ export const generateStyles = () => `
   }
 
   .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(106, 17, 203, 0.2);
+    transform: none !important;
   }
 
   .input-group-text, .form-control {
@@ -200,15 +199,29 @@ export const generateStyles = () => `
     right: 20px;
     z-index: 1000;
     color: var(--text-color);
-    border-color: var(--input-border);
-    background-color: var(--card-bg);
-    transition: all 0.3s var(--transition-timing);
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+    transition: color 0.3s var(--transition-timing);
   }
 
   #darkModeToggle:hover {
-    background-color: var(--dropdown-hover-bg);
-    border-color: var(--text-color);
-    color: var(--text-color);
+    transform: none !important;
+  }
+
+  #darkModeToggle i {
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+
+  #darkModeToggle {
+    width: auto;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .github-link {
@@ -221,7 +234,7 @@ export const generateStyles = () => `
     transition: color 0.3s ease;
   }
 
-  .github-link:hover { color: #6a11cb; }
+  .github-link:hover { color: #136cef; }
   
   .tooltip-icon {
     cursor: pointer;
@@ -506,8 +519,7 @@ export const generateStyles = () => `
   }
 
   .conversion-controls .btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transform: none !important;
   }
 
   .conversion-controls .btn-outline-primary {
