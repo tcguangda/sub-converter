@@ -24,6 +24,9 @@ sub-converter 是一个支持多种客户端格式的**订阅链接转换与短�
 ├── docker-compose.yml  # Docker Compose 示例
 ```
 
+## koyeb 一键部署 
+[![Deploy to Koyeb](https://www.koyeb.com/static/images/deploy/button.svg)](https://app.koyeb.com/deploy?name=sub-converter&type=docker&image=ghcr.io%2Feooce%2Fsub-converter%3Alatest&instance_type=free&regions=was&instances_min=0&autoscaling_sleep_idle_delay=300&ports=7788%3Bhttp%3B%2F&hc_protocol%5B7788%5D=tcp&hc_grace_period%5B7788%5D=5&hc_interval%5B7788%5D=30&hc_restart_limit%5B7788%5D=3&hc_timeout%5B7788%5D=5&hc_path%5B7788%5D=%2F&hc_method%5B7788%5D=get)
+
 ## 源码构建与运行
 
 1. 安装依赖
