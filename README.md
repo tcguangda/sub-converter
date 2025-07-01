@@ -22,6 +22,8 @@ sub-converter 是一个支持多种客户端格式的**订阅链接转换与短�
 ├── package.json        # 依赖与脚本
 ├── Dockerfile          # Docker 构建文件
 ```
+- [API 文档（APIDoc.md）](docs/APIDoc.md)
+
 
 ## 源码构建与运行
 
