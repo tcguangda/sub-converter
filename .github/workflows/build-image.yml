@@ -9,7 +9,7 @@ on:
       - 'package.json'
       - 'src/..'
   pull_request:
-    branches: [ main ]
+    branches: [ server ]
   workflow_dispatch:
 
 jobs:
