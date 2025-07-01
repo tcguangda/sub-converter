@@ -43,15 +43,15 @@ sub-converter 是一个支持多种客户端格式的**订阅链接转换与短�
 
 1. 构建镜像
    ```bash
-   docker build -t sublink-worker .
+   ghcr.io/eooce/sub-converter:latest
    ```
 2. 运行容器（持久化数据库）
    ```bash
    docker run -d \
      -v /your/host/database:/app/database \
      -p 7788:7788 \
-     --name sublink-worker \
-     sublink-worker
+     --name sub-converter \
+     ghcr.io/eooce/sub-converter:latest
    ```
    > 持久化目录 `/your/host/database` 用于保存 SQLite 数据库文件，防止数据丢失。
 
@@ -61,9 +61,9 @@ sub-converter 是一个支持多种客户端格式的**订阅链接转换与短�
 ```yaml
 version: '3'
 services:
-  sublink-worker:
+  sub-converter:
     build: .
-    container_name: sublink-worker
+    container_name: sub-converter
     ports:
       - "7788:7788"
     volumes:
