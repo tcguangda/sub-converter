@@ -46,7 +46,7 @@ sub-converter 是一个支持多种客户端格式的**订阅链接转换与短�
      -v /your/host/database:/app/database \
      -p 7788:7788 \
      --name sub-converter \
-     ghcr.io/eooce/sub-converter:latest
+     eooce/sub-converter:latest
    ```
    > 持久化目录 `/your/host/database` 用于保存 SQLite 数据库文件，防止数据丢失。
    ```
