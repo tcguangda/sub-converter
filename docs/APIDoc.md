@@ -2,17 +2,17 @@
 
 ## 概述
 
-Sublink Worker 是一个部署在 Cloudflare Workers 上的轻量级订阅转换工具。它可以将各种代理协议的分享 URL 转换为不同客户端可用的订阅链接。本文档概述了 API 端点及其用法。
+sub-converter 是一个部署在 Cloudflare Workers/docker容器/vps上的轻量级订阅转换工具。它可以将各种代理协议的分享 URL 转换为不同客户端可用的订阅链接。本文档概述了 API 端点及其用法。
 
 ## 基础 URL
 
 所有 API 请求应发送至:
 
 ```
-https://your-worker-domain.workers.dev
+https://your-domain
 ```
 
-将 `your-worker-domain` 替换为您实际的 Cloudflare Workers 域名。
+将 `your-domain` 替换为您实际的 Cloudflare Workers 域名或容器自定义域名。
 
 ## 端点
 
@@ -62,7 +62,7 @@ https://your-worker-domain.workers.dev
 **响应**:
 ```json
 {
-  "shortUrl": "https://your-worker-domain.workers.dev/s/abcdefg"
+  "shortUrl": "https://your-domain/s/abcdefg"
 }
 ```
 
@@ -100,7 +100,7 @@ https://your-worker-domain.workers.dev
 **示例**:
 
 ``` bash
-curl -X POST https://your-worker-domain.workers.dev/config \
+curl -X POST https://your-domain/config \
 -H "Content-Type: application/json" \
 -d '{
 "type": "clash",
@@ -111,7 +111,7 @@ curl -X POST https://your-worker-domain.workers.dev/config \
 **使用保存的配置**:
 将返回的配置ID添加到URL参数中即可使用保存的配置：
 ```
-https://your-worker-domain.workers.dev/clash?config=vmess://xxx&configId=clash_abc123
+https://your-domain/clash?config=vmess://xxx&configId=clash_abc123
 ```
 
 详情请参考[使用说明](#使用说明)
@@ -209,9 +209,9 @@ API 在出现问题时将返回适当的 HTTP 状态码和错误消息:
 
 3. 缩短 URL:
    ```
-   /shorten?url=https%3A%2F%2Fyour-worker-domain.workers.dev%2Fsingbox%3Fconfig%3Dvmess%253A%252F%252Fexample%26selectedRules%3Dbalanced
+   /shorten?url=https%3A%2F%2Fyour-domain%2Fsingbox%3Fconfig%3Dvmess%253A%252F%252Fexample%26selectedRules%3Dbalanced
    ```
 
 ## 结论
 
-Sublink Worker API 提供了一种灵活而强大的方式来生成和管理代理配置。它支持多种代理协议、各种客户端类型和可自定义的路由规则。URL 缩短功能允许轻松共享和管理复杂的配置。
+Sub-converter API 提供了一种灵活而强大的方式来生成和管理代理配置。它支持多种代理协议、各种客户端类型和可自定义的路由规则。URL 缩短功能允许轻松共享和管理复杂的配置。
