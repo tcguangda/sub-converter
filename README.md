@@ -62,7 +62,7 @@ sub-converter 是一个支持多种客户端格式的**订阅链接转换与短�
 version: '3'
 services:
   sub-converter:
-    build: .
+    image: ghcr.io/eooce/sub-converter:latest
     container_name: sub-converter
     ports:
       - "7788:7788"
