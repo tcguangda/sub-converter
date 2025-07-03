@@ -3,8 +3,8 @@ export const generateStyles = () => `
     --bg-color: #f0f2f5;
     --text-color: #495057;
     --card-bg: #ffffff;
-    --card-header-bg: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-    --btn-primary-bg: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    --card-header-bg: linear-gradient(135deg, #1b94cc 0%, #08a363 100%);
+    --btn-primary-bg: linear-gradient(135deg, #1b94cc 0%, #08a363 100%);
     --input-bg: #ffffff;
     --input-border: #ced4da;
     --input-text: #495057;
@@ -28,8 +28,8 @@ export const generateStyles = () => `
     --bg-color: #1a1a1a;
     --text-color: #e0e0e0;
     --card-bg: #2c2c2c;
-    --card-header-bg: linear-gradient(135deg, #4a0e8f 0%, #1a5ab8 100%);
-    --btn-primary-bg: linear-gradient(135deg, #4a0e8f 0%, #1a5ab8 100%);
+    --card-header-bg: linear-gradient(135deg, #1b94cc 0%, #08a363 100%);
+    --btn-primary-bg: linear-gradient(135deg, #1b94cc 0%, #08a363 100%);
     --input-bg: #3c3c3c;
     --input-border: #555555;
     --input-text: #e0e0e0;
@@ -47,7 +47,10 @@ export const generateStyles = () => `
     --switch-checked-bg: #4a0e8f;
   }
 
-  .container { max-width: 800px; margin-top: 4rem !important;}
+  .container {
+    max-width: 800px;
+    margin-top: 4rem !important;
+  }
 
   body {
     background-color: var(--bg-color);
