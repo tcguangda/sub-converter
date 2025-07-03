@@ -13,12 +13,12 @@ const translations = {
     defaultRules: ['广告拦截', '谷歌服务', '国外媒体', '电报消息'],
     configValidationError: '配置验证错误：',
     pageDescription: '在线订阅链接转换工具',
-    pageKeywords: '订阅链接,转换,Xray,SingBox,Clash,Surge',
+    pageKeywords: '订阅链接,转换,V2rayN,SingBox,Clash,Surge',
     pageTitle: '在线订阅转换',
     ogTitle: '在线订阅链接转换工具',
     ogDescription: '一个强大的订阅链接转换工具，支持多种客户端格式',
     shareUrls: '订阅链接或单节点',
-    urlPlaceholder: '在此输入base64(V2rayN)订阅链接或单节点(每行一个) . . .',
+    urlPlaceholder: '在此输入base64(V2rayN)订阅链接或单节点(每行一个). . .',
     advancedOptions: '自定义规则',
     baseConfigSettings: '基础配置设置',
     baseConfigTooltip: '在此处自定义您的基础配置',
@@ -80,13 +80,13 @@ const translations = {
     jsonValidationErrors: 'JSON验证错误',
     // 规则名称和出站名称的翻译
     outboundNames: {
-      'Auto Select': '⚡ 自动选择',
+      'Auto Select': '♻️ 自动选择',
       'Node Select': '🚀 节点选择',
       'Fall Back': '🐟 漏网之鱼',
-      'Ad Block': '🛑 广告拦截',
-      'AI Services': '💬 AI 服务',
+      'Ad Block': '🚫 广告拦截',
+      'AI Services': '🤖 AI 服务',
       'Bilibili': '📺 哔哩哔哩',
-      'Youtube': '📹 油管视频',
+      'Youtube': '▶️ 油管视频',
       'Google': '🔍 谷歌服务',
       'Private': '🏠 私有网络',
       'Location:CN': '🔒 国内服务',
@@ -97,14 +97,93 @@ const translations = {
       'Social Media': '🌐 社交媒体',
       'Streaming': '🎬 流媒体',
       'Gaming': '🎮 游戏平台',
-      'Education': '📚 教育资源',
+      'Education': '🎓 教育资源',
       'Financial': '💰 金融服务',
       'Cloud Services': '☁️ 云服务',
-      'Non-China': '🌐 非中国',
+      'Non-China': '🌏 非中国',
       'GLOBAL': 'GLOBAL'
     },
     UASettings: '自定义UserAgent',
-    UAtip: '默认值curl/7.74.0'
+    UAtip: '默认值curl/7.74.0',
+    apiDoc: {
+      title: 'API 文档',
+      back: '返回首页',
+      nav: {
+        main: '主要接口',
+        params: '参数说明',
+        examples: '示例',
+        response: '返回格式',
+        more: '更多'
+      },
+      intro: '本项目支持多种订阅转换、短链生成等 API，适合自动化脚本、第三方集成等场景，可直接将带参数的链接放进代理软件直接订阅，无需打开网页手动转换。',
+      mainList: [
+        { path: 'GET /singbox?config=...', desc: '生成 Singbox 配置' },
+        { path: 'GET /clash?config=...', desc: '生成 Clash 配置' },
+        { path: 'GET /surge?config=...', desc: '生成 Surge 配置' },
+        { path: 'GET /xray?config=...', desc: '生成 Xray 配置' },
+        { path: 'GET /shorten?url=...', desc: '生成短链' },
+        { path: 'GET /b/:code /c/:code /x/:code /s/:code', desc: '短链跳转' },
+        { path: 'POST /config', desc: '存储自定义配置' }
+      ],
+      params: [
+        { key: 'config', desc: '必填，原始订阅内容（Base64或明文）' },
+        { key: 'selectedRules', desc: '可选，预设规则集 key 或自定义规则' },
+        { key: 'customRules', desc: '可选，自定义规则（JSON）' },
+        { key: 'lang', desc: '可选，界面语言（zh-CN/en/fa/ru）' },
+        { key: 'ua', desc: '可选，User-Agent' }
+      ],
+      examples: [
+        {
+          title: 'Singbox 配置示例',
+          example: 'https://your-domain/singbox?config=订阅链接或单节点',
+          desc: 'config 参数支持订阅链接（Base64）或单节点(多个订阅链接或多个单节点用","或"%0A"或"\\n"分隔)，可直接将拼接的链接作为订阅链接实时更新节点'
+        },
+        {
+          title: 'Clash 配置示例',
+          example: 'https://your-domain/clash?config=订阅链接或单节点',
+          desc: 'config 参数支持订阅链接（Base64）或单节点(多个订阅链接或多个单节点用","或"%0A"或"\\n"分隔)，可直接将拼接的链接作为订阅链接实时更新节点'
+        },
+        {
+          title: 'Surge 配置示例',
+          example: 'https://your-domain/surge?config=订阅链接或单节点',
+          desc: 'config 参数支持订阅链接（Base64）或单节点(多个订阅链接或多个单节点用","或"%0A"或"\\n"分隔)，可直接将拼接的链接作为订阅链接实时更新节点'
+        },
+        {
+          title: 'Xray 配置示例',
+          example: 'https://your-domain/xray?config=订阅链接或单节点',
+          desc: 'config 参数支持订阅链接（Base64）或单节点(多个订阅链接或多个单节点用","或"%0A"或"\\n"分隔)，可直接将拼接的链接作为订阅链接实时更新节点'
+        },
+        {
+          title: '生成短链',
+          example: 'https://your-domain/shorten?url=https://your-domain/clash?config=订阅链接或单节点',
+          desc: 'url 参数为需要生成短链的完整链接，可直接将生成的作为订阅链接实时更新'
+        },
+        {
+          title: '短链跳转',
+          example: 'https://your-domain/c/xxxxxxx',
+          desc: 'xxxxxxx 为短链生成的 code，支持 /b/、/c/、/s/、/x/ 四种前缀'
+        },
+        {
+          title: '存储自定义配置',
+          example: 'POST https://your-domain/config',
+          desc: 'type 支持 clash/singbox/surge/xray，content 为配置内容（JSON 或 YAML 字符串）',
+          extra: 'Content-Type: application/json\n{\n  "type": "clash",\n  "content": "..."\n}'
+        }
+      ],
+      response: [
+        '配置接口返回 YAML/JSON/明文',
+        '短链接口返回 JSON 或 302 跳转',
+        '错误时返回 4xx/5xx 状态码及错误信息'
+      ],
+      more: [
+        '详细参数和进阶用法请参考 <a href="https://github.com/eooce/sub-converter/blob/main/docs/APIDoc.md" target="_blank">APIDoc.md</a>',
+        '如有疑问欢迎 issue 或 PR'
+      ],
+      labels: {
+        example: '示例：',
+        desc: '说明：'
+      },
+    },
   },
   'en-US': {
     missingInput: 'Missing input parameter',
@@ -184,13 +263,13 @@ const translations = {
     allJSONValid: 'All JSON rules are valid!',
     jsonValidationErrors: 'JSON validation errors',
     outboundNames:{
-      'Auto Select': '⚡ Auto Select',
+      'Auto Select': '♻️ Auto Select',
       'Node Select': '🚀 Node Select',
       'Fall Back': '🐟 Fall Back',
-      'Ad Block': '🛑 Ad Blocking',
-      'AI Services': '💬 AI Services',
+      'Ad Block': '🚫 Ad Blocking',
+      'AI Services': '🤖 AI Services',
       'Bilibili': '📺 Bilibili',
-      'Youtube': '📹 Youtube',
+      'Youtube': '▶️ Youtube',
       'Google': '🔍 Google Services',
       'Private': '🏠 Private Network',
       'Location:CN': '🔒 China Services',
@@ -201,14 +280,93 @@ const translations = {
       'Social Media': '🌐 Social Media',
       'Streaming': '🎬 Streaming',
       'Gaming': '🎮 Gaming Platform',
-      'Education': '📚 Education Resources',
+      'Education': '🎓 Education Resources',
       'Financial': '💰 Financial Services',
       'Cloud Services': '☁️ Cloud Services',
-      'Non-China': '🌐 Non-China',
+      'Non-China': '🌏 Non-China',
       'GLOBAL': 'GLOBAL'
     },
     UASettings: 'Custom UserAgent',
-    UAtip: 'By default it will use curl/7.74.0'
+    UAtip: 'By default it will use curl/7.74.0',
+    apiDoc: {
+      title: 'API Doc',
+      back: 'Back to Home',
+      nav: {
+        main: 'Main Endpoints',
+        params: 'Parameters',
+        examples: 'Examples',
+        response: 'Response Format',
+        more: 'More'
+      },
+      intro: 'This project supports various subscription conversion and short link generation APIs, suitable for automation scripts and third-party integration. You can directly use the parameterized link in your proxy software without manual conversion.',
+      mainList: [
+        { path: 'GET /singbox?config=...', desc: 'Generate Singbox config' },
+        { path: 'GET /clash?config=...', desc: 'Generate Clash config' },
+        { path: 'GET /surge?config=...', desc: 'Generate Surge config' },
+        { path: 'GET /xray?config=...', desc: 'Generate Xray config' },
+        { path: 'GET /shorten?url=...', desc: 'Generate short link' },
+        { path: 'GET /b/:code /c/:code /x/:code /s/:code', desc: 'Short link redirect' },
+        { path: 'POST /config', desc: 'Store custom config' }
+      ],
+      params: [
+        { key: 'config', desc: 'Required, original subscription content (Base64 or plain text)' },
+        { key: 'selectedRules', desc: 'Optional, preset rule set key or custom rules' },
+        { key: 'customRules', desc: 'Optional, custom rules (JSON)' },
+        { key: 'lang', desc: 'Optional, interface language (zh-CN/en/fa/ru)' },
+        { key: 'ua', desc: 'Optional, User-Agent' }
+      ],
+      examples: [
+        {
+          title: 'Singbox Example',
+          example: 'https://your-domain/singbox?config=subscription or node',
+          desc: 'config supports subscription (Base64) or single node(Multiple subscription links or multiple single nodes separated by “,” or "%0A" or "\\n"), can be used as a real-time updating subscription link'
+        },
+        {
+          title: 'Clash Example',
+          example: 'https://your-domain/clash?config=subscription or node',
+          desc: 'config supports subscription (Base64) or single node(Multiple subscription links or multiple single nodes separated by “,” or "%0A" or "\\n"), can be used as a real-time updating subscription link'
+        },
+        {
+          title: 'Surge Example',
+          example: 'https://your-domain/surge?config=subscription or node',
+          desc: 'config supports subscription (Base64) or single node(Multiple subscription links or multiple single nodes separated by “,” or "%0A" or "\\n"), can be used as a real-time updating subscription link'
+        },
+        {
+          title: 'Xray Example',
+          example: 'https://your-domain/xray?config=subscription or node',
+          desc: 'config supports subscription (Base64) or single node(Multiple subscription links or multiple single nodes separated by “,” or "%0A" or "\\n"), can be used as a real-time updating subscription link'
+        },
+        {
+          title: 'Shorten',
+          example: 'https://your-domain/shorten?url=https://your-domain/clash?config=subscription or node',
+          desc: 'url is the full link to be shortened, can be used as a real-time updating subscription link'
+        },
+        {
+          title: 'Short Link Redirect',
+          example: 'https://your-domain/c/xxxxxxx',
+          desc: 'xxxxxxx is the code generated by the short link, supports /b/, /c/, /s/, /x/ prefixes'
+        },
+        {
+          title: 'Store Custom Config',
+          example: 'POST https://your-domain/config',
+          desc: 'type supports clash/singbox/surge/xray, content is the config content (JSON or YAML string)',
+          extra: 'Content-Type: application/json\n{\n  "type": "clash",\n  "content": "..."\n}'
+        }
+      ],
+      response: [
+        'Config endpoints return YAML/JSON/plain text',
+        'Short link endpoints return JSON or 302 redirect',
+        'On error, returns 4xx/5xx status code and error message'
+      ],
+      more: [
+        'See <a href="https://github.com/eooce/sub-converter/blob/main/docs/APIDoc.md" target="_blank">APIDoc.md</a> for advanced usage',
+        'For questions, welcome issue or PR'
+      ],
+      labels: {
+        example: 'Example:',
+        desc: 'Note:'
+      },
+    },
   },
   'fa': {
     missingInput: 'پارامتر ورودی وجود ندارد',
@@ -288,13 +446,13 @@ const translations = {
     allJSONValid: 'همه قوانین JSON معتبر هستند!',
     jsonValidationErrors: 'خطاهای اعتبارسنجی JSON',
     outboundNames: {
-      'Auto Select': '⚡ انتخاب خودکار',
+      'Auto Select': '♻️ انتخاب خودکار',
       'Node Select': '🚀 انتخاب نود',
       'Fall Back': '🐟 فال بک',
-      'Ad Block': '🛑 مسدودسازی تبلیغات',
-      'AI Services': '💬 سرویس‌های هوش مصنوعی',
+      'Ad Block': '🚫 مسدودسازی تبلیغات',
+      'AI Services': '🤖 سرویس‌های هوش مصنوعی',
       'Bilibili': '📺 بیلی‌بیلی',
-      'Youtube': '📹 یوتیوب',
+      'Youtube': '▶️ یوتیوب',
       'Google': '🔍 سرویس‌های گوگل',
       'Private': '🏠 شبکه خصوصی',
       'Location:CN': '🔒 سرویس‌های چین',
@@ -305,14 +463,93 @@ const translations = {
       'Social Media': '🌐 شبکه‌های اجتماعی',
       'Streaming': '🎬 استریمینگ',
       'Gaming': '🎮 پلتفرم بازی',
-      'Education': '📚 منابع آموزشی',
+      'Education': '🎓 منابع آموزشی',
       'Financial': '💰 سرویس‌های مالی',
       'Cloud Services': '☁️ سرویس‌های ابری',
-      'Non-China': '🌐 خارج از چین',
+      'Non-China': '🌏 خارج از چین',
       'GLOBAL': 'GLOBAL'
     },
     UASettings: 'UserAgent سفارشی',
-    UAtip: 'به طور پیش‌فرض از curl/7.74.0 استفاده می‌کند'
+    UAtip: 'به طور پیش‌فرض از curl/7.74.0 استفاده می‌کند',
+    apiDoc: {
+      title: 'مستندات API',
+      back: 'بازگشت به خانه',
+      nav: {
+        main: 'رابط‌های اصلی',
+        params: 'توضیحات پارامترها',
+        examples: 'نمونه‌ها',
+        response: 'فرمت پاسخ',
+        more: 'بیشتر'
+      },
+      intro: 'این پروژه از تبدیل انواع اشتراک و تولید لینک کوتاه API پشتیبانی می‌کند و برای اسکریپت‌های خودکار و یکپارچه‌سازی شخص ثالث مناسب است. می‌توانید لینک پارامتردار را مستقیماً در نرم‌افزار پروکسی خود استفاده کنید بدون نیاز به تبدیل دستی.',
+      mainList: [
+        { path: 'GET /singbox?config=...', desc: 'تولید پیکربندی Singbox' },
+        { path: 'GET /clash?config=...', desc: 'تولید پیکربندی Clash' },
+        { path: 'GET /surge?config=...', desc: 'تولید پیکربندی Surge' },
+        { path: 'GET /xray?config=...', desc: 'تولید پیکربندی Xray' },
+        { path: 'GET /shorten?url=...', desc: 'تولید لینک کوتاه' },
+        { path: 'GET /b/:code /c/:code /x/:code /s/:code', desc: 'ریدایرکت لینک کوتاه' },
+        { path: 'POST /config', desc: 'ذخیره پیکربندی سفارشی' }
+      ],
+      params: [
+        { key: 'config', desc: 'اجباری، محتوای اشتراک اصلی (Base64 یا متن ساده)' },
+        { key: 'selectedRules', desc: 'اختیاری، کلید مجموعه قوانین پیش‌فرض یا قوانین سفارشی' },
+        { key: 'customRules', desc: 'اختیاری، قوانین سفارشی (JSON)' },
+        { key: 'lang', desc: 'اختیاری، زبان رابط (zh-CN/en/fa/ru)' },
+        { key: 'ua', desc: 'اختیاری، User-Agent' }
+      ],
+      examples: [
+        {
+          title: 'نمونه Singbox',
+          example: 'https://your-domain/singbox?config=اشتراک یا نود',
+          desc: 'پارامتر config از اشتراک (Base64)(روابط اشتراك متعددة أو عقد مفردة متعددة مفصولة بـ ”,“ أو ”\\n“) یا نود تکی پشتیبانی می‌کند و می‌تواند به عنوان لینک اشتراک به‌روزرسانی لحظه‌ای استفاده شود.'
+        },
+        {
+          title: 'نمونه Clash',
+          example: 'https://your-domain/clash?config=اشتراک یا نود',
+          desc: 'پارامتر config از اشتراک (Base64)(روابط اشتراك متعددة أو عقد مفردة متعددة مفصولة بـ ”,“ أو ”\\n“) یا نود تکی پشتیبانی می‌کند و می‌تواند به عنوان لینک اشتراک به‌روزرسانی لحظه‌ای استفاده شود.'
+        },
+        {
+          title: 'نمونه Surge',
+          example: 'https://your-domain/surge?config=اشتراک یا نود',
+          desc: 'پارامتر config از اشتراک (Base64)(روابط اشتراك متعددة أو عقد مفردة متعددة مفصولة بـ ”,“ أو ”\\n“) یا نود تکی پشتیبانی می‌کند و می‌تواند به عنوان لینک اشتراک به‌روزرسانی لحظه‌ای استفاده شود.'
+        },
+        {
+          title: 'نمونه Xray',
+          example: 'https://your-domain/xray?config=اشتراک یا نود',
+          desc: 'پارامتر config از اشتراک (Base64)(روابط اشتراك متعددة أو عقد مفردة متعددة مفصولة بـ ”,“ أو ”\\n“) یا نود تکی پشتیبانی می‌کند و می‌تواند به عنوان لینک اشتراک به‌روزرسانی لحظه‌ای استفاده شود.'
+        },
+        {
+          title: 'تولید لینک کوتاه',
+          example: 'https://your-domain/shorten?url=https://your-domain/clash?config=اشتراک یا نود',
+          desc: 'پارامتر url لینک کامل مورد نیاز برای کوتاه‌سازی است و می‌تواند به عنوان لینک اشتراک به‌روزرسانی لحظه‌ای استفاده شود.'
+        },
+        {
+          title: 'ریدایرکت لینک کوتاه',
+          example: 'https://your-domain/c/xxxxxxx',
+          desc: 'xxxxxxx کدی است که توسط لینک کوتاه تولید شده و از پیشوندهای /b/، /c/، /s/، /x/ پشتیبانی می‌کند.'
+        },
+        {
+          title: 'ذخیره پیکربندی سفارشی',
+          example: 'POST https://your-domain/config',
+          desc: 'type از clash/singbox/surge/xray پشتیبانی می‌کند و content محتوای پیکربندی (رشته JSON یا YAML) است.',
+          extra: 'Content-Type: application/json\n{\n  "type": "clash",\n  "content": "..."\n}'
+        }
+      ],
+      response: [
+        'رابط‌های پیکربندی YAML/JSON/متن ساده را بازمی‌گردانند.',
+        'رابط لینک کوتاه JSON یا ریدایرکت 302 بازمی‌گرداند.',
+        'در صورت خطا، کد وضعیت 4xx/5xx و پیام خطا بازمی‌گردد.'
+      ],
+      more: [
+        'برای استفاده پیشرفته به <a href="https://github.com/eooce/sub-converter/blob/main/docs/APIDoc.md" target="_blank">APIDoc.md</a> مراجعه کنید.',
+        'در صورت سوال، issue یا PR ارسال کنید.'
+      ],
+      labels: {
+        example: 'نمونه:',
+        desc: 'توضیح:'
+      }
+    }
   },
   'ru': {
     missingInput: 'Отсутствует входной параметр',
@@ -392,13 +629,13 @@ const translations = {
     allJSONValid: 'Все правила JSON действительны!',
     jsonValidationErrors: 'Ошибки проверки JSON',
     outboundNames: {
-      'Auto Select': '⚡ Автовыбор',
+      'Auto Select': '♻️ Автовыбор',
       'Node Select': '🚀 Выбор узла',
       'Fall Back': '🐟 Резерв',
-      'Ad Block': '🛑 Блокировка рекламы',
-      'AI Services': '💬 AI-сервисы',
+      'Ad Block': '🚫 Блокировка рекламы',
+      'AI Services': '🤖 AI-сервисы',
       'Bilibili': '📺 Bilibili',
-      'Youtube': '📹 YouTube',
+      'Youtube': '▶️ YouTube',
       'Google': '🔍 Сервисы Google',
       'Private': '🏠 Локальная сеть',
       'Location:CN': '🔒 Сервисы Китая',
@@ -409,14 +646,93 @@ const translations = {
       'Social Media': '🌐 Социальные сети',
       'Streaming': '🎬 Стриминг',
       'Gaming': '🎮 Игровые платформы',
-      'Education': '📚 Образовательные ресурсы',
+      'Education': '🎓 Образовательные ресурсы',
       'Financial': '💰 Финансовые сервисы',
       'Cloud Services': '☁️ Облачные сервисы',
-      'Non-China': '🌐 За пределами Китая',
+      'Non-China': '🌏 За пределами Китая',
       'GLOBAL': 'GLOBAL'
     },
     UASettings: 'Пользовательский UserAgent',
-    UAtip: 'По умолчанию используется curl/7.74.0'
+    UAtip: 'По умолчанию используется curl/7.74.0',
+    apiDoc: {
+      title: 'Документация API',
+      back: 'Назад на главную',
+      nav: {
+        main: 'Основные эндпоинты',
+        params: 'Описание параметров',
+        examples: 'Примеры',
+        response: 'Формат ответа',
+        more: 'Подробнее'
+      },
+      intro: 'Этот проект поддерживает различные API для конвертации подписок и генерации коротких ссылок, подходит для автоматизации и сторонней интеграции. Вы можете использовать ссылку с параметрами напрямую в прокси-программе без ручного преобразования.',
+      mainList: [
+        { path: 'GET /singbox?config=...', desc: 'Генерация конфигурации Singbox' },
+        { path: 'GET /clash?config=...', desc: 'Генерация конфигурации Clash' },
+        { path: 'GET /surge?config=...', desc: 'Генерация конфигурации Surge' },
+        { path: 'GET /xray?config=...', desc: 'Генерация конфигурации Xray' },
+        { path: 'GET /shorten?url=...', desc: 'Генерация короткой ссылки' },
+        { path: 'GET /b/:code /c/:code /x/:code /s/:code', desc: 'Переадресация по короткой ссылке' },
+        { path: 'POST /config', desc: 'Сохранить пользовательскую конфигурацию' }
+      ],
+      params: [
+        { key: 'config', desc: 'Обязательный, исходное содержимое подписки (Base64 или текст)' },
+        { key: 'selectedRules', desc: 'Необязательный, ключ набора предустановленных правил или пользовательские правила' },
+        { key: 'customRules', desc: 'Необязательный, пользовательские правила (JSON)' },
+        { key: 'lang', desc: 'Необязательный, язык интерфейса (zh-CN/en/fa/ru)' },
+        { key: 'ua', desc: 'Необязательный, User-Agent' }
+      ],
+      examples: [
+        {
+          title: 'Пример Singbox',
+          example: 'https://your-domain/singbox?config=подписка или нода',
+          desc: 'Параметр config поддерживает подписку (Base64) или отдельную ноду(Несколько ссылок на подписку или несколько отдельных узлов, разделенных символами «,» или «\n»), можно использовать как ссылку для обновления подписки в реальном времени.'
+        },
+        {
+          title: 'Пример Clash',
+          example: 'https://your-domain/clash?config=подписка или нода',
+          desc: 'Параметр config поддерживает подписку (Base64) или отдельную ноду(Несколько ссылок на подписку или несколько отдельных узлов, разделенных символами «,» или «\n»), можно использовать как ссылку для обновления подписки в реальном времени.'
+        },
+        {
+          title: 'Пример Surge',
+          example: 'https://your-domain/surge?config=подписка или нода',
+          desc: 'Параметр config поддерживает подписку (Base64) или отдельную ноду(Несколько ссылок на подписку или несколько отдельных узлов, разделенных символами «,» или «\n»), можно использовать как ссылку для обновления подписки в реальном времени.'
+        },
+        {
+          title: 'Пример Xray',
+          example: 'https://your-domain/xray?config=подписка или нода',
+          desc: 'Параметр config поддерживает подписку (Base64) или отдельную ноду(Несколько ссылок на подписку или несколько отдельных узлов, разделенных символами «,» или «\n»), можно использовать как ссылку для обновления подписки в реальном времени.'
+        },
+        {
+          title: 'Генерация короткой ссылки',
+          example: 'https://your-domain/shorten?url=https://your-domain/clash?config=подписка или нода',
+          desc: 'Параметр url — это полная ссылка для сокращения, можно использовать как ссылку для обновления подписки в реальном времени.'
+        },
+        {
+          title: 'Переадресация по короткой ссылке',
+          example: 'https://your-domain/c/xxxxxxx',
+          desc: 'xxxxxxx — это код, сгенерированный короткой ссылкой, поддерживаются префиксы /b/, /c/, /s/, /x/.'
+        },
+        {
+          title: 'Сохранить пользовательскую конфигурацию',
+          example: 'POST https://your-domain/config',
+          desc: 'type поддерживает clash/singbox/surge/xray, content — содержимое конфигурации (строка JSON или YAML).',
+          extra: 'Content-Type: application/json\n{\n  "type": "clash",\n  "content": "..."\n}'
+        }
+      ],
+      response: [
+        'Эндпоинты конфигурации возвращают YAML/JSON/текст',
+        'Эндпоинты коротких ссылок возвращают JSON или 302 redirect',
+        'В случае ошибки возвращается код состояния 4xx/5xx и сообщение об ошибке.'
+      ],
+      more: [
+        'Для подробностей и расширенного использования смотрите <a href="https://github.com/eooce/sub-converter/blob/main/docs/APIDoc.md" target="_blank">APIDoc.md</a>.',
+        'По вопросам — создавайте issue или PR.'
+      ],
+      labels: {
+        example: 'Пример:',
+        desc: 'Описание:'
+      }
+    }
   }
 };
 
