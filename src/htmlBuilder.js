@@ -23,12 +23,47 @@ const generateHead = () => `
     <meta property="og:description" content="${t('ogDescription')}">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://sublink.eooce.com/">
+    <link rel="icon" href="/src/img/favicon.ico" type="image/x-icon">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link rel="icon" href="/src/img/favicon.ico" type="image/x-icon">
     <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
     <style>
       ${generateStyles()}
+      .api-doc-btn {
+        color: #0aa26d;
+        background: none;
+        border: none;
+        box-shadow: none;
+        font-weight: 600;
+        border-radius: 0;
+        padding: 0.5rem 1.2rem;
+        transition: none;
+      }
+      .api-doc-btn:hover, .api-doc-btn:focus {
+        color: #1f579b !important;
+        background: none;
+        border: none;
+        box-shadow: none;
+      }
+      /* 深色模式适配：支持 prefers-color-scheme 和 data-theme=dark */
+      @media (prefers-color-scheme: dark) {
+        .api-doc-btn {
+          color: #fff !important;
+        }
+        .api-doc-btn:hover, .api-doc-btn:focus {
+          color: #1f579b !important;
+        }
+      }
+      body[data-theme="dark"] .api-doc-btn,
+      html[data-theme="dark"] .api-doc-btn {
+        color: #fff !important;
+      }
+      body[data-theme="dark"] .api-doc-btn:hover,
+      html[data-theme="dark"] .api-doc-btn:hover,
+      body[data-theme="dark"] .api-doc-btn:focus,
+      html[data-theme="dark"] .api-doc-btn:focus {
+        color: #1f579b !important;
+      }
     </style>
   </head>
 `;
@@ -36,6 +71,7 @@ const generateHead = () => `
 const generateBody = (xrayUrl, singboxUrl, clashUrl, surgeUrl, baseUrl) => `
   <body>
     ${generateDarkModeToggle()}
+    ${generateApiDocLink()}
     ${generateLanguageSelector()}
     ${generateGithubLink()}
     <div class="container mt-5">
@@ -63,6 +99,10 @@ const generateBody = (xrayUrl, singboxUrl, clashUrl, surgeUrl, baseUrl) => `
       })();
     </script>
   </body>
+`;
+
+const generateApiDocLink = () => `
+  <a href="#" id="apiDocLink" class="api-doc-btn" style="position: fixed; top: 13px; right: 200px; z-index: 1001; font-size: 1rem; text-decoration: none; color: #0aa26d;">API文档</a>
 `;
 
 const generateLanguageSelector = () => `
@@ -204,6 +244,24 @@ const generateScripts = () => `
     ${customPathFunctions()}
     ${saveConfig()}
     ${clearConfig()}
+    // 动态多语言API文档按钮
+    document.addEventListener('DOMContentLoaded', function() {
+      function updateApiDocLink() {
+        var lang = document.getElementById('langSelect').value;
+        var apiDocLink = document.getElementById('apiDocLink');
+        var apiDocText = {
+          'zh-CN': 'API文档',
+          'en': 'API Doc',
+          'en-US': 'API Doc',
+          'fa': 'مستندات API',
+          'ru': 'Документация API'
+        };
+        apiDocLink.textContent = apiDocText[lang] || 'API Doc';
+        apiDocLink.href = '/api-doc?lang=' + lang;
+      }
+      updateApiDocLink();
+      document.getElementById('langSelect').addEventListener('change', updateApiDocLink);
+    });
   </script>
 `;
 
