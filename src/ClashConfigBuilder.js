@@ -24,6 +24,22 @@ export class ClashConfigBuilder extends BaseConfigBuilder {
 
     convertProxy(proxy) {
         switch(proxy.type) {
+            case 'socks5':
+                // The format for a socks5 proxy in Clash config.
+                const clashSocks5 = {
+                    name: proxy.tag,
+                    type: 'socks5',
+                    server: proxy.server,
+                    port: parseInt(proxy.server_port),
+                };
+
+                // Add username and password if they exist.
+                if (proxy.username && proxy.password) {
+                    clashSocks5.username = proxy.username;
+                    clashSocks5.password = proxy.password;
+                }
+
+                return clashSocks5;
             case 'shadowsocks':
                 return {
                     name: proxy.tag,
